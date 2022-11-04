@@ -44,44 +44,53 @@ const ViewCountries: FC = () => {
         setRegion(e.target.value)
     }
 
-    // console.log(region)
+    console.log(isLoading)
     
     return (
-      <WrapHome>
-        <RowFilter>
-            <div>
-                <input type={"search"} placeholder="Buscar" />
+        <>
+        {!isLoading && (
+            <div style={{display:"block", textAlign: 'center'}}>
+            <img src="/img/giphy.gif"/>
             </div>
-            <div>
-            <select defaultValue='Filter By Region' value={region} onChange={handleChange} id="cars">
-                <option disabled>Filter By Region</option>
-                <option value='Oceania'>Oceania</option>
-                <option value='Africa'>Africa</option>
-                <option value='Americas'>Americas</option>
-                <option value='Asia'>Asia</option>
-                <option value='Europe'>Europe</option>
-            </select>
-            {region && (
-                <button onClick={() => resetFilter()}>Reset</button>
-            )}
-            </div>
-        </RowFilter>
-        <RowCountries>
-            {countries?.map((it) => (
-            <Card>
-                <Link href={`countrie/${it?.name}`}> 
-                <img src={it?.flag}/>
+        )}
+        {!!isLoading && (
+        <WrapHome>
+            <RowFilter>
                 <div>
-                    <h3>{it?.name}</h3>
-                    <p><b>Population: </b>{it?.population}</p>
-                    <p><b>Region: </b>{it?.region}</p>
-                    <p><b>Capital: </b>{it?.capital}</p>
+                    <input type={"search"} placeholder="Buscar" />
                 </div>
-                </Link>
-            </Card>
-            ))}
-        </RowCountries>
-      </WrapHome>
+                <div>
+                <select defaultValue='Filter By Region' value={region} onChange={handleChange} id="cars">
+                    <option disabled>Filter By Region</option>
+                    <option value='Oceania'>Oceania</option>
+                    <option value='Africa'>Africa</option>
+                    <option value='Americas'>Americas</option>
+                    <option value='Asia'>Asia</option>
+                    <option value='Europe'>Europe</option>
+                </select>
+                {region && (
+                    <button onClick={() => resetFilter()}>Reset</button>
+                )}
+                </div>
+            </RowFilter>
+            <RowCountries>
+                {countries?.map((it) => (
+                <Card>
+                    <Link href={`countrie/${it?.name}`}> 
+                    <img src={it?.flag}/>
+                    <div>
+                        <h3>{it?.name}</h3>
+                        <p><b>Population: </b>{it?.population}</p>
+                        <p><b>Region: </b>{it?.region}</p>
+                        <p><b>Capital: </b>{it?.capital}</p>
+                    </div>
+                    </Link>
+                </Card>
+                ))}
+            </RowCountries>
+        </WrapHome>
+        )}
+      </>
     )
   }
   
